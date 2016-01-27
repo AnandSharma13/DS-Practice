@@ -1,63 +1,37 @@
 package Trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
- * Created by Anand on 1/24/2016.
+ * Created by Anand on 1/27/2016.
  */
 public class KarumanchiTrees {
 
-//test
-    public boolean isSymmetric(TreeNode root) {
+    public static TreeNode insertNodeIntoTree(TreeNode root, TreeNode node){
+        if (root ==null)
+            return node;
 
-        if (root == null)
-            return true;
-        if (root.left == null && root.right == null)
-            return true;
-        return isSymmetricHelper(root.left, root.right);
+        Queue<TreeNode> Q = new LinkedList<>();
+        Q.add(root);
+        while(!Q.isEmpty()){
+            TreeNode tempNode = Q.remove();
+            if(tempNode.left!=null)
+                Q.add(tempNode.left);
+            else {
+                tempNode.left = node;
+                return root;
+            }
+            if(tempNode.right!=null)
+                Q.add(tempNode.right);
+            else {
+                tempNode.right = node;
+                return root;
+            }
+        }
+        return root;
     }
 
-    public boolean isSymmetricHelper(TreeNode left, TreeNode right) {
-
-        if(left == null || right == null)
-            return left == right;
-        if(left.val != right.val)
-            return false;
-        else
-            return isSymmetricHelper(left.left, right.left) && isSymmetricHelper(left.right, right.left);
-
-    }
-
-    public static boolean isValidBstHelper(TreeNode root, int min, int max) {
-        if (root == null)
-            return true;
-        if (root.val <= min || root.val >= max)
-            return false;
-        return isValidBstHelper(root.left, min, root.val) && isValidBstHelper(root.right, root.val, max);
-    }
-
-    public static boolean isValidBst(TreeNode root) {
-
-        return isValidBstHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-
-    public static int findMax(TreeNode root) {
-        if (root == null)
-            return Integer.MIN_VALUE;
-        int left_val;
-        int right_val;
-        int root_val = root.val;
-        int max = root.val;
-
-        left_val = findMax(root.left);
-        right_val = findMax(root.right);
-
-        max = left_val > right_val ? left_val : right_val;
-        if (root_val > max)
-            max = root_val;
-
-        return max;
-
-
-    }
 
     public static void main(String[] args) {
 
@@ -68,7 +42,7 @@ public class KarumanchiTrees {
         TreeNode n5 = new TreeNode(8);
         TreeNode n6 = new TreeNode(12);
         TreeNode n7 = new TreeNode(22);
-
+        TreeNode n8 = new TreeNode(45);
         n1.left = n2;
         n1.right = n3;
         n2.left = n4;
@@ -76,7 +50,12 @@ public class KarumanchiTrees {
         n3.left = n6;
         n3.right = n7;
 
-        System.out.println(isValidBst(n1));
+        BTreePrinter.printNode(n1);
+        TreeNode val = insertNodeIntoTree(n1,n8);
+        System.out.println();
+        BTreePrinter.printNode(val);
+
+
     }
 
 

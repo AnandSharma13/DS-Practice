@@ -1,61 +1,150 @@
 package Trees;
 
-import java.sql.PreparedStatement;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by Anand on 1/24/2016.
  */
 public class TreeTraversals {
 
-    public static void PostOrder(TreeNode root){
+    public static void PostOrder(TreeNode root) {
         if (root == null)
             return;
         else {
             PostOrder(root.left);
             PostOrder(root.right);
-            System.out.print(root.val+ " ");
+            System.out.print(root.val + " ");
         }
     }
 
-    public static void InOrder(TreeNode root){
+    public static void InOrder(TreeNode root) {
         if (root == null)
             return;
         else {
             InOrder(root.left);
-            System.out.print (root.val + " ");
+            System.out.print(root.val + " ");
             InOrder(root.right);
         }
     }
 
-    public static void PreOrder(TreeNode root){
-        if(root == null)
+    public static void PreOrder(TreeNode root) {
+        if (root == null)
             return;
-        else{
-            System.out.print (root.val + " ");
+        else {
+            System.out.print(root.val + " ");
             PreOrder(root.left);
             PreOrder(root.right);
         }
     }
 
-    public static void LevelOrder(TreeNode root){
-        if(root == null){
+
+    public static void LevelOrder(TreeNode root) {
+        if (root == null) {
             return;
         }
         Queue<TreeNode> Q = new LinkedList<>();
         Q.add(root);
-        while (!Q.isEmpty()){
+        while (!Q.isEmpty()) {
             TreeNode node = Q.remove();
             System.out.println(node.val);
-            if (node.left!=null)
+            if (node.left != null)
                 Q.add(node.left);
-            if (node.right!=null)
+            if (node.right != null)
                 Q.add(node.right);
         }
     }
 
-    public static void main(String [] args){
+    public static void InOrderIterative(TreeNode root) {
+        if (root == null)
+            return;
+
+        Stack<TreeNode> stack = new Stack<>();
+        while (true) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                if (stack.isEmpty())
+                    break;
+                TreeNode node = stack.pop();
+                System.out.println(node.val);
+                root = node.right;
+            }
+
+        }
+    }
+
+
+    //TODO Go through this again and again.........................
+    public static void postOrderIterative(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        while (true) {
+            if (root != null) {
+                if (root.right != null)
+                    stack.push(root.right);
+                stack.push(root);
+                root = root.left;
+            } else {
+
+                if (!stack.isEmpty()) {
+                    TreeNode r = stack.pop();
+                    root = r;
+                    if (root.right != null && !stack.isEmpty() && stack.peek() == root.right) {
+                        TreeNode rt = stack.pop();
+                        stack.push(r);
+                        root = root.right;
+                    } else {
+                        System.out.println(root.val);
+                        root = null;
+                    }
+                }
+            }
+            if (stack.isEmpty())
+                break;
+        }
+    }
+
+
+    public static void ZigZagTraversal(TreeNode root) {
+        if (root == null)
+            return;
+        Stack<TreeNode> leftToRightStack = new Stack<>();
+        Stack<TreeNode> rightToLeftStack = new Stack<>();
+        //if flag is true, we go left to right
+        boolean flag = true;
+        rightToLeftStack.push(root);
+
+        while (true) {
+            TreeNode temp;
+            if (flag && !rightToLeftStack.isEmpty()) {
+                temp = rightToLeftStack.pop();
+                System.out.println(temp.val);
+                if (temp.left != null)
+                    leftToRightStack.push(temp.left);
+                if (temp.left != null)
+                    leftToRightStack.push(temp.right);
+                if (rightToLeftStack.isEmpty())
+                    flag = false;
+            } else if (!flag && !leftToRightStack.isEmpty()) {
+                temp = leftToRightStack.pop();
+                System.out.println(temp.val);
+                if (temp.right != null)
+                    rightToLeftStack.push(temp.right);
+                if (temp.left != null)
+                    rightToLeftStack.push(temp.left);
+                if (leftToRightStack.isEmpty())
+                    flag = true;
+            }
+            if (rightToLeftStack.isEmpty() && leftToRightStack.isEmpty())
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
 
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -72,13 +161,8 @@ public class TreeTraversals {
         n3.left = n6;
         n3.right = n7;
 
-        PreOrder(n1);
-        System.out.println();
-        InOrder(n1);
-        System.out.println();
-        PostOrder(n1);
-        System.out.println();
-        LevelOrder(n1);
+        BTreePrinter.printNode(n1);
+        postOrderIterative(n1);
 
     }
 }

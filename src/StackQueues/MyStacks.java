@@ -6,5 +6,4 @@ package StackQueues;
 public class MyStacks {
 
 
-
 }

@@ -41,10 +41,8 @@ public class KarumanchiLinkedList {
         n4.next = n5;
         n5.next = n6;
         n6.next = null;
-       LinkedListPrinter.printLinkedList(n1);
-        nthNode(n1,2);
-
-
+        LinkedListPrinter.printLinkedList(n1);
+        nthNode(n1, 2);
 
 
     }

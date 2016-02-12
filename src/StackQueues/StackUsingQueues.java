@@ -11,6 +11,19 @@ public class StackUsingQueues {
     Queue<Integer> Q1 = new LinkedList<>();
     Queue<Integer> Q2 = new LinkedList<>();
 
+    public static void main(String[] args) {
+        StackUsingQueues obj = new StackUsingQueues();
+        System.out.println(obj.empty());
+        obj.push(3);
+        obj.push(4);
+        obj.push(5);
+        obj.push(8);
+        System.out.println(obj.empty());
+        System.out.println(obj.top());
+        obj.pop();
+        System.out.println(obj.top());
+    }
+
     public void push(int x) {
         if (Q1.isEmpty()) {
             Q1.add(x);
@@ -33,13 +46,10 @@ public class StackUsingQueues {
         if (!Q1.isEmpty()) {
             int el = Q1.remove();
             System.out.println("element popped " + el);
-        }
-        else if (!Q2.isEmpty()){
+        } else if (!Q2.isEmpty()) {
             int el = Q2.remove();
-            System.out.println("element popped is "+el);
-        }
-        else
-        {
+            System.out.println("element popped is " + el);
+        } else {
             System.out.println("Stack is empty");
         }
 
@@ -51,13 +61,10 @@ public class StackUsingQueues {
         if (!Q1.isEmpty()) {
             el = Q1.peek();
             System.out.println("element at top is " + el);
-        }
-        else if (!Q2.isEmpty()){
+        } else if (!Q2.isEmpty()) {
             el = Q2.peek();
-            System.out.println("element at top is "+el);
-        }
-        else
-        {
+            System.out.println("element at top is " + el);
+        } else {
             System.out.println("Stack is empty");
             el = -1;
         }
@@ -66,21 +73,8 @@ public class StackUsingQueues {
 
     // Return whether the stack is empty.
     public boolean empty() {
-        if(Q1.isEmpty() && Q2.isEmpty())
+        if (Q1.isEmpty() && Q2.isEmpty())
             return true;
         return false;
-    }
-
-    public static void main(String[] args) {
-        StackUsingQueues obj = new StackUsingQueues();
-        System.out.println(obj.empty());
-        obj.push(3);
-        obj.push(4);
-        obj.push(5);
-        obj.push(8);
-        System.out.println(obj.empty());
-        System.out.println(obj.top());
-        obj.pop();
-        System.out.println(obj.top());
     }
 }

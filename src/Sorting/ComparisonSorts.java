@@ -19,7 +19,7 @@ public class ComparisonSorts {
                     int tmp = nums[i];
                     nums[i] = nums[i + 1];
                     nums[i + 1] = tmp;
-                    swapped=true;
+                    swapped = true;
                 }
             }
         }

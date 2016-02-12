@@ -175,60 +175,48 @@ public class KarumanchiTrees {
         System.out.println();
     }
 
-    public static Boolean hasPathSum(TreeNode root) {
-        return hasPathSumHelper(root, 0);
-    }
 
-    private static Boolean hasPathSumHelper(TreeNode root, int sum) {
-        if (root == null)
-            return sum == 0;
-        else {
-            sum -= root.val;
-            return hasPathSumHelper(root.left, sum) || hasPathSumHelper(root.right, sum);
-        }
-    }
 
     public static int nodesSum(TreeNode root) {
         if (root == null)
             return 0;
         return root.val + nodesSum(root.left) + nodesSum(root.right);
     }
+
     public static TreeNode treeMirror(TreeNode root) {
-        if(root == null)
+        if (root == null)
             return root;
         else {
             TreeNode left = treeMirror(root.left);
             TreeNode right = treeMirror(root.right);
-            root.left =right;
+            root.left = right;
             root.right = left;
         }
         return root;
     }
 
 
-
-    public static void printAncestorsNonRecursive(TreeNode root){
+    public static void printAncestorsNonRecursive(TreeNode root) {
 
 
     }
 
-    public static void printNodeAncestorsRecursive(TreeNode root, TreeNode node){
-        printAncestorsHelper(root,node);
+    public static void printNodeAncestorsRecursive(TreeNode root, TreeNode node) {
+        printAncestorsHelper(root, node);
     }
 
-    public static boolean printAncestorsHelper(TreeNode root, TreeNode node){
-        if(root == null)
+    public static boolean printAncestorsHelper(TreeNode root, TreeNode node) {
+        if (root == null)
             return false;
-        if(root == node)
+        if (root == node)
             return true;
 
-        if(printAncestorsHelper(root.left, node)||printAncestorsHelper(root.right,node) ){
+        if (printAncestorsHelper(root.left, node) || printAncestorsHelper(root.right, node)) {
             System.out.println(root.val);
             return true;
         }
         return false;
     }
-
 
 
     public static void main(String[] args) {
@@ -252,7 +240,7 @@ public class KarumanchiTrees {
         n4.left = n8;
         n4.right = n9;
         BTreePrinter.printNode(n1);
-        printAncestorsHelper(n1,n8);
+        printAncestorsHelper(n1, n8);
     }
 
 

@@ -1,8 +1,6 @@
 package Trees;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Anand on 1/24/2016.
@@ -141,6 +139,45 @@ public class LeetCodeTrees {
         }
     }
 
+    public static TreeNode LCABinaryTree(TreeNode root, TreeNode n1, TreeNode n2) {
+        if (root == null)
+            return root;
+        if (root == n1 || root == n2)
+            return root;
+        TreeNode left = LCABinaryTree(root.left, n1, n2);
+        TreeNode right = LCABinaryTree(root.right, n1, n2);
+
+        if (left != null && right != null)
+            return root;
+        else
+            //both node are on the same side and one is the ancestor of the other
+            return left != null ? left : right;
+    }
+
+    public static TreeNode LCABinarySearchTree(TreeNode root, int n1, int n2) {
+        if (root == null)
+            return root;
+
+        if (root.val == n1 || root.val == n2)
+            return root;
+        if ((root.val < n1 && root.val > n2) || (root.val > n1 && root.val < n2))
+            return root;
+
+        if (root.val > n1 && root.val > n2) {
+            return LCABinarySearchTree(root.left, n1, n2);
+        } else {
+            return LCABinarySearchTree(root.right, n1, n2);
+        }
+    }
+
+    public static List<Integer> createList(List<Integer> tempList, int pathlen) {
+        List<Integer> list1 = new ArrayList<>();
+        for (int i = 0; i < pathlen; ++i) {
+            list1.add(tempList.get(i));
+        }
+        return list1;
+    }
+
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null || q == null)
             return p == q;
@@ -189,36 +226,52 @@ public class LeetCodeTrees {
 
     }
 
-
-    public static TreeNode LCABinaryTree(TreeNode root, TreeNode n1, TreeNode n2) {
+    public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null)
-            return root;
-        if (root == n1 || root == n2)
-            return root;
-        TreeNode left = LCABinaryTree(root.left, n1, n2);
-        TreeNode right = LCABinaryTree(root.right, n1, n2);
-
-        if (left != null && right != null)
-            return root;
-        else
-            return left != null ? left : right;
-    }
-
-    public static TreeNode LCABinarySearchTree(TreeNode root, int n1, int n2) {
-        if (root == null)
-            return root;
-
-        if (root.val == n1 || root.val == n2)
-            return root;
-        if ((root.val < n1 && root.val > n2) || (root.val > n1 && root.val < n2))
-            return root;
-
-        if (root.val > n1 && root.val > n2) {
-            return LCABinarySearchTree(root.left, n1, n2);
-        } else {
-            return LCABinarySearchTree(root.right, n1, n2);
+            return false;
+        if (root.left == null && root.right == null)
+            return sum == root.val;
+        else {
+            sum -= root.val;
+            return hasPathSum(root.left, sum) && hasPathSum(root.right, sum);
         }
     }
+
+    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null)
+            return result;
+        List<Integer> tempList = new ArrayList<>();
+        printPathSum(root, sum, result, tempList, 0);
+        return result;
+    }
+
+    public static void printPathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tempList, int pathlen) {
+
+
+        if (root == null) {
+            return;
+        }
+        tempList.add(root.val);
+        pathlen++;
+        if (root.left == null && root.right == null && root.val == sum) {
+            result.add(createList(tempList, pathlen));
+        }
+
+        sum -= root.val;
+
+        printPathSum(root.left, sum, result, tempList, pathlen);
+        printPathSum(root.right, sum, result, tempList, pathlen);
+    }
+
+    public static TreeNode invertTree(TreeNode root) {
+        if(root ==null)
+            return root;
+
+
+            return root;
+    }
+
 
     public static void main(String[] args) {
 
@@ -226,7 +279,7 @@ public class LeetCodeTrees {
         TreeNode n2 = new TreeNode(5);
         TreeNode n3 = new TreeNode(20);
         TreeNode n4 = new TreeNode(4);
-        TreeNode n5 = new TreeNode(8);
+        TreeNode n5 = new TreeNode(4);
         TreeNode n6 = new TreeNode(12);
         TreeNode n7 = new TreeNode(22);
         TreeNode n8 = new TreeNode(80);
@@ -236,11 +289,10 @@ public class LeetCodeTrees {
         n2.right = n5;
         n3.left = n6;
         n3.right = n7;
-        TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
-        BTreePrinter.printNode(temp);
-        System.out.println(LCABinarySearchTree(temp, 6, 4).val);
+     //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
+        BTreePrinter.printNode(n1);
+        System.out.println(pathSum(n1, 18));
     }
-
 
 
 }

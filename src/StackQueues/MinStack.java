@@ -13,19 +13,18 @@ public class MinStack {
 
     public void push(int x) {
         myStack.push(x);
-        if(!minStack.isEmpty() && minStack.peek()>=x){
+        if (!minStack.isEmpty() && minStack.peek() >= x) {
             minStack.push(x);
-        }
-        else{
+        } else {
             minStack.push(x);
         }
     }
 
     public void pop() {
         int top = myStack.pop();
-        if(top == minStack.peek())
+        if (top == minStack.peek())
             minStack.pop();
-        System.out.println("Value popped is "+top);
+        System.out.println("Value popped is " + top);
     }
 
     public int top() {

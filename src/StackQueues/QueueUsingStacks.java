@@ -10,7 +10,18 @@ public class QueueUsingStacks {
     Stack<Integer> poppingStack = new Stack<>();
     Stack<Integer> storingStack = new Stack<>();
 
-
+    public static void main(String[] args) {
+        QueueUsingStacks obj = new QueueUsingStacks();
+        System.out.println(obj.empty());
+        obj.push(5);
+        obj.push(8);
+        obj.push(2);
+        obj.push(9);
+        System.out.println(obj.empty());
+        System.out.println(obj.peek());
+        obj.pop();
+        System.out.println(obj.peek());
+    }
 
     public void push(int x) {
         storingStack.push(x);
@@ -51,22 +62,10 @@ public class QueueUsingStacks {
 
     // Return whether the queue is empty.
     public boolean empty() {
-        if(poppingStack.isEmpty()&& storingStack.isEmpty())
+        if (poppingStack.isEmpty() && storingStack.isEmpty())
             return true;
         return false;
 
-    }
-    public static void main(String [] args) {
-        QueueUsingStacks obj = new QueueUsingStacks();
-        System.out.println(obj.empty());
-        obj.push(5);
-        obj.push(8);
-        obj.push(2);
-        obj.push(9);
-        System.out.println(obj.empty());
-        System.out.println(obj.peek());
-        obj.pop();
-        System.out.println(obj.peek());
     }
 
 

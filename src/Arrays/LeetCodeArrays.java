@@ -36,14 +36,13 @@ public class LeetCodeArrays {
         int index = lo;
         lo = 0;
         hi = length - 1;
-        while (lo<=hi) {
+        while (lo <= hi) {
             int mid = lo + hi / 2;
             int realMid = (index + mid) % length;
             if (nums[realMid] == k) {
                 System.out.println("Number found");
                 return;
-            }
-            else if (nums[realMid] < k)
+            } else if (nums[realMid] < k)
                 lo = mid + 1;
             else
                 hi = mid - 1;
@@ -53,6 +52,6 @@ public class LeetCodeArrays {
     public static void main(String[] args) {
 
         int[] nums = new int[]{7, 8, 9, 10, 11, 12, 13, -1, 2, 4};
-        searchRotatedSorted(nums,2);
+        searchRotatedSorted(nums, 2);
     }
 }

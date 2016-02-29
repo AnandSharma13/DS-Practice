@@ -21,7 +21,6 @@ public class GeekForGeeks {
                 }
             }
         }
-
         int max = 0;
         for (int i = 0; i < lis.length; i++) {
             if (lis[i] > max)
@@ -29,6 +28,28 @@ public class GeekForGeeks {
         }
         System.out.println(max);
     }
+
+    public static int minJumpsDP(int []arr){
+
+        int n = arr.length;
+        if(n==0|| arr[0]==0){
+            return 0;
+        }
+        int [] jumps = new int[n];
+        jumps[0] =0;
+
+        for (int i =1; i<n;i++){
+            jumps[i]= Integer.MAX_VALUE;
+            for(int j =0;j<i;j++){
+                if(i<=j+arr[j] && jumps[j]!=Integer.MAX_VALUE){
+                    jumps[i] = Math.min(jumps[i],jumps[j]+1);
+                }
+            }
+        }
+        return jumps[n-1];
+    }
+
+
 
 
     public static void fib(int n) {
@@ -43,7 +64,7 @@ public class GeekForGeeks {
 
 
     public static void main(String[] args) {
-        LongestIncreasingSubsequence(new int[]{2, 3, 0, 1, 4});
+        System.out.println(minJumpsDP(new int[]{2, 3, 0, 1, 4}));
 
     }
 }

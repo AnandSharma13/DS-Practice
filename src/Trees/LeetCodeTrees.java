@@ -273,6 +273,33 @@ public class LeetCodeTrees {
     }
 
 
+    public st
+
+
+    public static void flatten(TreeNode root) {
+
+        if(root == null)
+            return;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        flatten(left);
+        flatten(right);
+
+        root.left = null;
+        root.right = left;
+
+        TreeNode cur = root;
+        while (cur.right!=null)
+            cur = cur.right;
+        cur.right =right;
+    }
+
+
+
+
+
+
     public static void main(String[] args) {
 
         TreeNode n1 = new TreeNode(9);
@@ -291,7 +318,9 @@ public class LeetCodeTrees {
         n3.right = n7;
      //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
         BTreePrinter.printNode(n1);
-        System.out.println(pathSum(n1, 18));
+        flatten(n1);
+        BTreePrinter.printNode(n1);
+
     }
 
 

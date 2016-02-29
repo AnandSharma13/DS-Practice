@@ -49,9 +49,36 @@ public class LeetCodeArrays {
         }
     }
 
+    public static boolean isPalindrome(int x) {
+        if (x<0 || (x!=0 && x%10==0)) return false;
+        int rev = 0;
+        while (x>rev){
+            rev = rev*10 + x%10;
+            x = x/10;
+        }
+        return (x==rev || x==rev/10);
+    }
+
+    public static void reverseNumber(int x){
+        int result =0;
+        while(x>0){
+            result = result*10 + x%10;
+            x=x/10;
+        }
+        System.out.println(result);
+    }
+
     public static void main(String[] args) {
 
-        int[] nums = new int[]{7, 8, 9, 10, 11, 12, 13, -1, 2, 4};
-        searchRotatedSorted(nums, 2);
+        int[] nums = new int[]{7, 8, 12, 13, -1, 2, 4};
+
+        int res = 6^54^2^3^4^1^5;
+        int two = 1^2^3^4^5;
+        System.out.println(res);
+        System.out.println(two);
+        System.out.println(res^two);
+
     }
+
+
 }

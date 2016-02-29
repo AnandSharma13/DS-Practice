@@ -115,6 +115,20 @@ public class LeetCodeLinkedList {
         return dummy.next;
     }
 
+
+    public static ListNode reverse(ListNode dummyHead, ListNode endNode) {
+
+        ListNode last = dummyHead.next;
+        ListNode cur = last.next;
+
+        while (cur != endNode) {
+            last.next = cur.next;
+            cur.next = dummyHead.next;
+            dummyHead.next = cur;
+            cur = last.next;
+        }
+        return last;
+    }
     public static ListNode mergeTwoList(ListNode head1, ListNode head2) {
 
         ListNode dummy = new ListNode(0);
@@ -138,6 +152,9 @@ public class LeetCodeLinkedList {
         return dummy.next;
     }
 
+
+
+
     public static ListNode mergeTwoListsRecursive(ListNode head1, ListNode head2) {
 
         ListNode newHead;
@@ -157,18 +174,38 @@ public class LeetCodeLinkedList {
         return newHead;
     }
 
-    public static ListNode reverse(ListNode dummyHead, ListNode endNode) {
 
-        ListNode last = dummyHead.next;
-        ListNode cur = last.next;
 
-        while (cur != endNode) {
-            last.next = cur.next;
-            cur.next = dummyHead.next;
-            dummyHead.next = cur;
-            cur = last.next;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        return addTwoNumbers(l1, l2, 0);
+
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2, int carry) {
+
+        if (l1 == null && l2 == null)
+            return null;
+
+        int sum = 0;
+        if (l1 != null) {
+            sum += l1.val;
+            l1 = l1.next;
         }
-        return last;
+        if (l2 != null) {
+            sum += l2.val;
+            l2 = l2.next;
+        }
+        sum += carry;
+        if (sum >= 10)
+            carry = 1;
+        else
+            carry = 0;
+
+        ListNode node = new ListNode(sum % 10);
+        node.next = addTwoNumbers(l1, l2, carry);
+
+        return node;
     }
 
 
@@ -205,6 +242,7 @@ public class LeetCodeLinkedList {
         LinkedListPrinter.printLinkedList(n1);
         LinkedListPrinter.printLinkedList(mergeTwoListsRecursive(n1, a1));
     }
+
 
 
 }

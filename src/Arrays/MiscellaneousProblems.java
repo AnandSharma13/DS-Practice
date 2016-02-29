@@ -120,9 +120,24 @@ public class MiscellaneousProblems {
         return i - 1;
     }
 
+
+    private static int firstGreaterEqual(int[] A, int target) {
+        int low = 0, high = A.length;
+        while (low < high) {
+            int mid = low + ((high - low) /2);
+            //low <= mid < high
+            if (A[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7};
-        System.out.println(nums[kthLargest(nums, 4)]);
+        int[] nums = new int[]{0,1, 2, 3, 4};
+       findKthSmallest(nums, 2);
 
     }
 }

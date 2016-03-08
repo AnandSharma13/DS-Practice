@@ -16,7 +16,6 @@ public class LeetCodeLinkedList {
         return node;
     }
 
-
     public static boolean cycleDetection(ListNode head) {
 
         if (head == null) {
@@ -99,6 +98,7 @@ public class LeetCodeLinkedList {
 
         if (head == null)
             return head;
+
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode previous = dummy;
@@ -115,7 +115,6 @@ public class LeetCodeLinkedList {
         return dummy.next;
     }
 
-
     public static ListNode reverse(ListNode dummyHead, ListNode endNode) {
 
         ListNode last = dummyHead.next;
@@ -129,6 +128,7 @@ public class LeetCodeLinkedList {
         }
         return last;
     }
+
     public static ListNode mergeTwoList(ListNode head1, ListNode head2) {
 
         ListNode dummy = new ListNode(0);
@@ -152,9 +152,6 @@ public class LeetCodeLinkedList {
         return dummy.next;
     }
 
-
-
-
     public static ListNode mergeTwoListsRecursive(ListNode head1, ListNode head2) {
 
         ListNode newHead;
@@ -174,7 +171,63 @@ public class LeetCodeLinkedList {
         return newHead;
     }
 
+    public static ListNode deleteDups(ListNode l1) {
 
+        if (l1 == null || l1.next == null)
+            return l1;
+
+
+        ListNode cur = l1;
+        int preVal = cur.val;
+        ListNode prevPtr = cur;
+        cur = cur.next;
+        while (cur != null) {
+            if (cur.val == preVal) {
+                prevPtr.next = cur.next;
+                cur.next = null;
+                cur = prevPtr.next;
+            } else {
+                prevPtr = cur;
+                preVal = cur.val;
+                cur = cur.next;
+            }
+        }
+        return l1;
+    }
+
+    public static void main(String[] args) {
+        ListNode n1 = new ListNode(2);
+        ListNode n2 = new ListNode(2);
+        ListNode n3 = new ListNode(2);
+        ListNode n4 = new ListNode(2);
+        ListNode n5 = new ListNode(2);
+        ListNode n6 = new ListNode(2);
+
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = n6;
+
+
+        ListNode a1 = new ListNode(2);
+        ListNode a2 = new ListNode(3);
+        ListNode a3 = new ListNode(4);
+        ListNode a4 = new ListNode(7);
+        ListNode a5 = new ListNode(5);
+        ListNode a6 = new ListNode(7);
+
+
+        a1.next = a2;
+        a2.next = a3;
+        a3.next = a4;
+        a4.next = a5;
+        a5.next = a6;
+
+        LinkedListPrinter.printLinkedList(n1);
+        LinkedListPrinter.printLinkedList(deleteDups(n1));
+    }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
@@ -207,42 +260,6 @@ public class LeetCodeLinkedList {
 
         return node;
     }
-
-
-    public static void main(String[] args) {
-        ListNode n1 = new ListNode(2);
-        ListNode n2 = new ListNode(3);
-        ListNode n3 = new ListNode(4);
-        ListNode n4 = new ListNode(5);
-        ListNode n5 = new ListNode(6);
-        ListNode n6 = new ListNode(7);
-
-
-        n1.next = n2;
-        n2.next = n3;
-        n3.next = n4;
-        n4.next = n5;
-        n5.next = n6;
-
-
-        ListNode a1 = new ListNode(2);
-        ListNode a2 = new ListNode(3);
-        ListNode a3 = new ListNode(4);
-        ListNode a4 = new ListNode(5);
-        ListNode a5 = new ListNode(6);
-        ListNode a6 = new ListNode(7);
-
-
-        a1.next = a2;
-        a2.next = a3;
-        a3.next = a4;
-        a4.next = a5;
-        a5.next = a6;
-
-        LinkedListPrinter.printLinkedList(n1);
-        LinkedListPrinter.printLinkedList(mergeTwoListsRecursive(n1, a1));
-    }
-
 
 
 }

@@ -29,28 +29,25 @@ public class GeekForGeeks {
         System.out.println(max);
     }
 
-    public static int minJumpsDP(int []arr){
+    public static int minJumpsDP(int[] arr) {
 
         int n = arr.length;
-        if(n==0|| arr[0]==0){
+        if (n == 0 || arr[0] == 0) {
             return 0;
         }
-        int [] jumps = new int[n];
-        jumps[0] =0;
+        int[] jumps = new int[n];
+        jumps[0] = 0;
 
-        for (int i =1; i<n;i++){
-            jumps[i]= Integer.MAX_VALUE;
-            for(int j =0;j<i;j++){
-                if(i<=j+arr[j] && jumps[j]!=Integer.MAX_VALUE){
-                    jumps[i] = Math.min(jumps[i],jumps[j]+1);
+        for (int i = 1; i < n; i++) {
+            jumps[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < i; j++) {
+                if (i <= j + arr[j] && jumps[j] != Integer.MAX_VALUE) {
+                    jumps[i] = Math.min(jumps[i], jumps[j] + 1);
                 }
             }
         }
-        return jumps[n-1];
+        return jumps[n - 1];
     }
-
-
-
 
     public static void fib(int n) {
         int[] f = new int[n + 1];
@@ -62,9 +59,27 @@ public class GeekForGeeks {
         System.out.println(f[n]);
     }
 
+    public static boolean subsetSum(int[] nums, int k) {
+        //i,j - i will be the sum of the array
+        boolean[][] solution = new boolean[k + 1][nums.length + 1];
+        for (int i = 0; i <= k; i++)
+            solution[i][0] = false;
+        for (int j = 0; j <= nums.length; j++)
+            solution[0][j] = true;
+
+        for (int i = 1; i <=k; i++)
+            for (int j = 1; j <= nums.length; j++) {
+                solution[i][j] = solution[i][j - 1];
+                if (i >= nums[j - 1]) {
+                    solution[i][j] = solution[i][j] || solution[i - nums[j - 1]][j - 1];
+                }
+            }
+        return solution[k][nums.length];
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(minJumpsDP(new int[]{2, 3, 0, 1, 4}));
+        System.out.println(subsetSum(new int[]{2, 3, 0, 1, 4}, 4));
 
     }
 }

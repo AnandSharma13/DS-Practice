@@ -35,8 +35,30 @@ public class LeetCodeStrings {
         return list;
     }
 
+    public static void permOfString(String str){
+        char [] charStr = str.toCharArray();
+        perm(charStr, 0, charStr.length);
+    }
+
+
+    public static void perm(char [] str, int i, int n){
+        if(i == n){
+            System.out.println(String.valueOf(str));
+            return;
+        } for(int k = i;k<n ;k++){
+            char temp = str[k];
+            str[k] = str[i];
+            str[i] =  temp;
+        perm(str, i+1, n);
+            temp = str[i];
+            str[i] = str[k];
+            str[k] = temp;
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println(groupAnagrams(new String[]{"ate", "eat", "tea"}));
+    //    System.out.println(groupAnagrams(new String[]{"ate", "eat", "tea"}));
+      permOfString("aba");
 
 
     }

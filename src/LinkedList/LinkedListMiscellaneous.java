@@ -27,7 +27,7 @@ public class LinkedListMiscellaneous {
 
     public static ListNode[] partitionArray(ListNode[] original, int start, int end) {
 
-        ListNode[] result = new ListNode[end -start];
+        ListNode[] result = new ListNode[end - start];
 
         int j = 0;
         for (int i = start; i < end; i++) {
@@ -36,6 +36,18 @@ public class LinkedListMiscellaneous {
         }
 
         return result;
+    }
+
+    public static ListNode reverseLinkedListPairs(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+
+        ListNode newHead = head.next;
+        head.next = newHead.next;
+        newHead.next = head;
+        newHead.next.next = reverseLinkedListPairs(newHead.next.next);
+        return newHead;
+
     }
 
     public ListNode mergeKLists(ListNode[] lists) {
@@ -48,7 +60,7 @@ public class LinkedListMiscellaneous {
             return mergeTwoLists(lists[0], lists[1]);
 
 
-        return mergeTwoLists(mergeKLists(partitionArray(lists,0,length/2)), mergeKLists(partitionArray(lists, length/2,length)));
+        return mergeTwoLists(mergeKLists(partitionArray(lists, 0, length / 2)), mergeKLists(partitionArray(lists, length / 2, length)));
     }
 
     public static void main(String[] args) {
@@ -65,17 +77,20 @@ public class LinkedListMiscellaneous {
         ListNode a2 = new ListNode(4);
         ListNode a3 = new ListNode(5);
         ListNode a4 = new ListNode(19);
+        ListNode a5 = new ListNode(1);
 
 
         a1.next = a2;
         a2.next = a3;
         a3.next = a4;
+        a4.next = a5;
 
-
-        LinkedListPrinter.printLinkedList(n1);
+        //    LinkedListPrinter.printLinkedList(n1);
         LinkedListPrinter.printLinkedList(a1);
-        LinkedListPrinter.printLinkedList(mergeTwoLists(n1, a1));
+        LinkedListPrinter.printLinkedList(reverseLinkedListPairs(a1));
     }
+
+
 
 
 }

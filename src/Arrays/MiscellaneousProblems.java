@@ -136,7 +136,7 @@ public class MiscellaneousProblems {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{0,1, 2, 3, 4};
+        int[] nums = new int[]{4,2,1,-2,0};
        findKthSmallest(nums, 2);
 
     }

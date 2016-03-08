@@ -1,6 +1,6 @@
 package Trees;
 
-import java.util.ArrayList;
+import sun.reflect.generics.tree.Tree;
 
 /**
  * Created by Anand on 2/4/2016.
@@ -8,39 +8,86 @@ import java.util.ArrayList;
 public class TreePractice {
 
 
-    public static void printRootLeaf(TreeNode root) {
-
-        ArrayList<TreeNode> path = new ArrayList<>();
-        printRootLeafUtils(root, path, 0);
-    }
-
-    public static void printRootLeafUtils(TreeNode root, ArrayList<TreeNode> mylist, int len) {
+    public static void FindInTree(TreeNode root, int val) {
 
         if (root == null)
             return;
 
-        else {
-            mylist.add(len, root);
-            len++;
-
-            if (root.left == null && root.right == null)
-                printArray(mylist, len);
-            else {
-                printRootLeafUtils(root.left, mylist, len);
-                printRootLeafUtils(root.right, mylist, len);
-
-            }
+        if (root.val == val) {
+            System.out.println("Found");
         }
+        FindInTree(root.left, val);
+        FindInTree(root.right, val);
     }
 
-    public static void printArray(ArrayList<TreeNode> arr, int len) {
-        for (int i = 0; i < arr.size(); i++)
-            System.out.print(arr.get(i).val + " ");
-        System.out.println();
+
+    public static TreeNode arrayToBST(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return null;
+        TreeNode node = arrayToBSTHelper(arr, 0, arr.length - 1);
+        return node;
     }
+
+    static TreeNode arrayToBSTHelper(int[] arr, int start, int end) {
+
+        if(start>end)
+            return null;
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(arr[mid]);
+        node.left = arrayToBSTHelper(arr, start, mid -1);
+        node.right = arrayToBSTHelper(arr, mid + 1, end);
+        return node;
+    }
+
+
+    public static TreeNode findLCABT(TreeNode root, int n1, int n2){
+
+        if(root == null)
+            return null;
+        if(root.val == n1 || root.val == n2){
+            return root;
+        }
+        TreeNode left = findLCABT(root.left, n1, n2);
+        TreeNode right = findLCABT(root.right, n1, n2);
+        if(left!=null && right!=null){
+            return root;
+        }
+        return left!=null?left:right;
+    }
+
+
+
+    public static TreeNode kthSmallestNode(TreeNode root, int k){
+
+        int count = countNodes(root.left);
+
+        if(k<=count){
+            kthSmallestNode(root.left, k);
+        }
+        else if(k>count+1) {
+            kthSmallestNode(root.right, k - count - 1);
+        }
+        return root;
+
+    }
+
+    public static int countNodes(TreeNode root){
+        if(root ==null)
+            return 0;
+
+        int count = countNodes(root.left) + countNodes(root.right) + 1;
+        return count;
+    }
+
 
 
     public static void main(String[] args) {
+
+
+        TreeNode root =  arrayToBST(new int[]{1,2,4,6,7,9,12});
+        BTreePrinter.printNode(root);
+
+
 
         TreeNode n1 = new TreeNode(9);
         TreeNode n2 = new TreeNode(5);
@@ -59,9 +106,11 @@ public class TreePractice {
         n3.left = n6;
         n3.right = n7;
         n4.left = n8;
-        n4.right = n9;
-        BTreePrinter.printNode(n1);
-        printRootLeaf(n1);
+
+
+        System.out.println(findLCABT(root, 7,12).val);
+
+
 
     }
 }

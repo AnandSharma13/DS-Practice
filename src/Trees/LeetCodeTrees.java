@@ -178,6 +178,79 @@ public class LeetCodeTrees {
         return list1;
     }
 
+    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null)
+            return result;
+        List<Integer> tempList = new ArrayList<>();
+        printPathSum(root, sum, result, tempList, 0);
+        return result;
+    }
+
+    public static void printPathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tempList, int pathlen) {
+
+
+        if (root == null) {
+            return;
+        }
+        tempList.add(root.val);
+        pathlen++;
+        if (root.left == null && root.right == null && root.val == sum) {
+            result.add(createList(tempList, pathlen));
+        }
+
+        sum -= root.val;
+
+        printPathSum(root.left, sum, result, tempList, pathlen);
+        printPathSum(root.right, sum, result, tempList, pathlen);
+    }
+
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null)
+            return root;
+
+
+        return root;
+    }
+
+    public static void flatten(TreeNode root) {
+
+        if (root == null)
+            return;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+
+        flatten(left);
+        flatten(right);
+
+        root.left = null;
+        root.right = left;
+
+        TreeNode cur = root;
+        while (cur.right != null)
+            cur = cur.right;
+        cur.right = right;
+    }
+
+    public static List<String> binaryTreePaths(TreeNode root) {
+
+        List<String> answer = new ArrayList<>();
+        binaryTreePathsHelper(root, "", answer);
+        return answer;
+    }
+
+    public static void binaryTreePathsHelper(TreeNode root, String path, List<String> answer) {
+
+        if (root.left == null && root.right == null) {
+            answer.add(path + root.val);
+        }
+        if (root.left != null)
+            binaryTreePathsHelper(root.left, path + "->" + root.val, answer);
+        if (root.right != null)
+            binaryTreePathsHelper(root.right, path + "->" + root.val, answer);
+    }
+
+
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null || q == null)
             return p == q;
@@ -237,69 +310,6 @@ public class LeetCodeTrees {
         }
     }
 
-    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null)
-            return result;
-        List<Integer> tempList = new ArrayList<>();
-        printPathSum(root, sum, result, tempList, 0);
-        return result;
-    }
-
-    public static void printPathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tempList, int pathlen) {
-
-
-        if (root == null) {
-            return;
-        }
-        tempList.add(root.val);
-        pathlen++;
-        if (root.left == null && root.right == null && root.val == sum) {
-            result.add(createList(tempList, pathlen));
-        }
-
-        sum -= root.val;
-
-        printPathSum(root.left, sum, result, tempList, pathlen);
-        printPathSum(root.right, sum, result, tempList, pathlen);
-    }
-
-    public static TreeNode invertTree(TreeNode root) {
-        if(root ==null)
-            return root;
-
-
-            return root;
-    }
-
-
-    public st
-
-
-    public static void flatten(TreeNode root) {
-
-        if(root == null)
-            return;
-        TreeNode left = root.left;
-        TreeNode right = root.right;
-
-        flatten(left);
-        flatten(right);
-
-        root.left = null;
-        root.right = left;
-
-        TreeNode cur = root;
-        while (cur.right!=null)
-            cur = cur.right;
-        cur.right =right;
-    }
-
-
-
-
-
-
     public static void main(String[] args) {
 
         TreeNode n1 = new TreeNode(9);
@@ -316,12 +326,11 @@ public class LeetCodeTrees {
         n2.right = n5;
         n3.left = n6;
         n3.right = n7;
-     //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
+        //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
         BTreePrinter.printNode(n1);
         flatten(n1);
         BTreePrinter.printNode(n1);
 
     }
-
 
 }

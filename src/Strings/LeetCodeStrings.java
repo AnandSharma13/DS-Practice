@@ -35,31 +35,68 @@ public class LeetCodeStrings {
         return list;
     }
 
-    public static void permOfString(String str){
-        char [] charStr = str.toCharArray();
+    public static void permOfString(String str) {
+        char[] charStr = str.toCharArray();
         perm(charStr, 0, charStr.length);
     }
 
-
-    public static void perm(char [] str, int i, int n){
-        if(i == n){
+    public static void perm(char[] str, int i, int n) {
+        if (i == n) {
             System.out.println(String.valueOf(str));
             return;
-        } for(int k = i;k<n ;k++){
+        }
+        for (int k = i; k < n; k++) {
             char temp = str[k];
             str[k] = str[i];
-            str[i] =  temp;
-        perm(str, i+1, n);
+            str[i] = temp;
+            perm(str, i + 1, n);
             temp = str[i];
             str[i] = str[k];
             str[k] = temp;
         }
     }
 
-    public static void main(String[] args) {
-    //    System.out.println(groupAnagrams(new String[]{"ate", "eat", "tea"}));
-      permOfString("aba");
+    public static void possiblePalindromes(String str) {
+    }
 
+
+    public static void allCombs(String str){
+
+        if(str == null)
+            return;
+        HashSet <String> set = new HashSet();
+        allCombsHelper(str.toCharArray(), 0, str.length(), set);
+        set.forEach(System.out::println);
+    }
+
+    public static void allCombsHelper(char [] str, int i, int n, HashSet<String> set){
+
+        if(i==n)
+            set.add(String.valueOf(str));
+
+        for(int k=i;k<n;k++){
+            str[i] = Character.toLowerCase(str[i]);
+            allCombsHelper(str,i+1,n,set);
+            str[i] = Character.toUpperCase(str[i]);
+            allCombsHelper(str,i+1,n,set);
+        }
+    }
+
+
+    public static void tokenizeString(String str){
+        StringTokenizer stnz = new StringTokenizer(str, "[\\.\\,\\!]");
+
+        while (stnz.hasMoreTokens()){
+            System.out.println(stnz.nextToken());
+        }
+    }
+
+
+
+
+
+    public static void main(String[] args) {
+        tokenizeString("0ab sdfdklf.sdfdhfhkjd! sdfkdlf");
 
     }
 

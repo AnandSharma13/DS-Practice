@@ -50,6 +50,63 @@ public class LinkedListMiscellaneous {
 
     }
 
+    public static ListNode addLists(ListNode root1, ListNode root2) {
+
+        int[] carry = new int[]{0};
+
+        ListNode result= addListsHelper(root1, root2, carry);
+        if(carry[0] >0)
+        {
+            ListNode newRoot = new ListNode (carry[0]);
+            newRoot.next = result;
+            return newRoot;
+        }
+        return result;
+    }
+
+    public static ListNode addListsHelper(ListNode root1, ListNode root2, int[] carry) {
+
+        if(root1==null)
+            return null;
+
+        int sum=0;
+        ListNode node = new ListNode();
+        node.next = addListsHelper(root1.next, root2.next, carry);
+        sum = root1.val+root2.val + carry[0];
+        node.val = sum%10;
+        if(sum>9)
+            carry[0] = sum/10;
+        else
+            carry[0] =0;
+
+        return node;
+
+    }
+
+    public static void main(String[] args) {
+        ListNode n1 = new ListNode(2);
+        ListNode n2 = new ListNode(8);
+        ListNode n3 = new ListNode(7);
+
+        n1.next = n2;
+        n2.next = n3;
+
+        ListNode a1 = new ListNode(8);
+        ListNode a2 = new ListNode(4);
+        ListNode a3 = new ListNode(5);
+
+        a1.next = a2;
+        a2.next = a3;
+
+        LinkedListPrinter.printLinkedList(n1);
+        LinkedListPrinter.printLinkedList(a1);
+
+        LinkedListPrinter.printLinkedList(addLists(a1, n1));
+
+        //    LinkedListPrinter.printLinkedList(n1);
+
+    }
+
     public ListNode mergeKLists(ListNode[] lists) {
         int length = lists.length;
         if (length == 0)
@@ -62,35 +119,6 @@ public class LinkedListMiscellaneous {
 
         return mergeTwoLists(mergeKLists(partitionArray(lists, 0, length / 2)), mergeKLists(partitionArray(lists, length / 2, length)));
     }
-
-    public static void main(String[] args) {
-        ListNode n1 = new ListNode(2);
-        ListNode n2 = new ListNode(8);
-        ListNode n3 = new ListNode(15);
-
-
-        n1.next = n2;
-        n2.next = n3;
-
-
-        ListNode a1 = new ListNode(0);
-        ListNode a2 = new ListNode(4);
-        ListNode a3 = new ListNode(5);
-        ListNode a4 = new ListNode(19);
-        ListNode a5 = new ListNode(1);
-
-
-        a1.next = a2;
-        a2.next = a3;
-        a3.next = a4;
-        a4.next = a5;
-
-        //    LinkedListPrinter.printLinkedList(n1);
-        LinkedListPrinter.printLinkedList(a1);
-        LinkedListPrinter.printLinkedList(reverseLinkedListPairs(a1));
-    }
-
-
 
 
 }

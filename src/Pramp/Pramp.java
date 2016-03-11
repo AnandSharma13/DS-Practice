@@ -10,7 +10,7 @@ public class Pramp {
 
     public static void wordCount(String text) {
 
-        String[] tokens = text.split("\\s");
+        String[] tokens = text.split("\\.");
         SortedSet<Map.Entry<String, Integer>> sortedset = new TreeSet<>(
                 new Comparator<Map.Entry<String, Integer>>() {
                     @Override

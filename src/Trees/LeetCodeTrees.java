@@ -205,14 +205,6 @@ public class LeetCodeTrees {
         printPathSum(root.right, sum, result, tempList, pathlen);
     }
 
-    public static TreeNode invertTree(TreeNode root) {
-        if (root == null)
-            return root;
-
-
-        return root;
-    }
-
     public static void flatten(TreeNode root) {
 
         if (root == null)
@@ -245,11 +237,10 @@ public class LeetCodeTrees {
             answer.add(path + root.val);
         }
         if (root.left != null)
-            binaryTreePathsHelper(root.left, path + "->" + root.val, answer);
+            binaryTreePathsHelper(root.left, path + root.val+"->", answer);
         if (root.right != null)
-            binaryTreePathsHelper(root.right, path + "->" + root.val, answer);
+            binaryTreePathsHelper(root.right, path +  root.val+"->" , answer);
     }
-
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null || q == null)
@@ -328,8 +319,7 @@ public class LeetCodeTrees {
         n3.right = n7;
         //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
         BTreePrinter.printNode(n1);
-        flatten(n1);
-        BTreePrinter.printNode(n1);
+        System.out.println(binaryTreePaths(n1));
 
     }
 

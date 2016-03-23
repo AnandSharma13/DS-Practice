@@ -54,10 +54,9 @@ public class LinkedListMiscellaneous {
 
         int[] carry = new int[]{0};
 
-        ListNode result= addListsHelper(root1, root2, carry);
-        if(carry[0] >0)
-        {
-            ListNode newRoot = new ListNode (carry[0]);
+        ListNode result = addListsHelper(root1, root2, carry);
+        if (carry[0] > 0) {
+            ListNode newRoot = new ListNode(carry[0]);
             newRoot.next = result;
             return newRoot;
         }
@@ -66,30 +65,72 @@ public class LinkedListMiscellaneous {
 
     public static ListNode addListsHelper(ListNode root1, ListNode root2, int[] carry) {
 
-        if(root1==null)
+        if (root1 == null)
             return null;
 
-        int sum=0;
+        int sum = 0;
         ListNode node = new ListNode();
         node.next = addListsHelper(root1.next, root2.next, carry);
-        sum = root1.val+root2.val + carry[0];
-        node.val = sum%10;
-        if(sum>9)
-            carry[0] = sum/10;
+        sum = root1.val + root2.val + carry[0];
+        node.val = sum % 10;
+        if (sum > 9)
+            carry[0] = sum / 10;
         else
-            carry[0] =0;
+            carry[0] = 0;
 
         return node;
 
+    }
+
+    public static ListNode splitLinkedList(ListNode root) {
+
+        ListNode slowPtr = root;
+        ListNode fastPtr = root;
+        while (fastPtr != null && fastPtr.next != null) {
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+        }
+        return slowPtr;
+    }
+
+    public static ListNode splitCircularLinkedList(ListNode root) {
+
+        ListNode slowPtr = root;
+        ListNode fastPtr = root;
+        ListNode curr = root;
+        while (fastPtr.next != root) {
+            slowPtr = slowPtr.next;
+            if(fastPtr.next.next == root){
+                fastPtr = fastPtr.next;
+                break;
+            }
+            fastPtr = fastPtr.next.next;
+        }
+
+        while(curr!=slowPtr){
+            System.out.println(curr.val);
+            curr = curr.next;
+        }
+        System.out.println("Second list below");
+        while(curr!=root){
+            System.out.println(curr.val);
+            curr = curr.next;
+        }
+
+        return slowPtr;
     }
 
     public static void main(String[] args) {
         ListNode n1 = new ListNode(2);
         ListNode n2 = new ListNode(8);
         ListNode n3 = new ListNode(7);
+        ListNode n4 = new ListNode(17);
+
 
         n1.next = n2;
         n2.next = n3;
+        n3.next = n4;
+        n4.next = n1;
 
         ListNode a1 = new ListNode(8);
         ListNode a2 = new ListNode(4);
@@ -98,11 +139,7 @@ public class LinkedListMiscellaneous {
         a1.next = a2;
         a2.next = a3;
 
-        LinkedListPrinter.printLinkedList(n1);
-        LinkedListPrinter.printLinkedList(a1);
-
-        LinkedListPrinter.printLinkedList(addLists(a1, n1));
-
+   splitCircularLinkedList(n1);
         //    LinkedListPrinter.printLinkedList(n1);
 
     }

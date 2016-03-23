@@ -1,5 +1,7 @@
 package Numbers;
 
+import java.util.Vector;
+
 /**
  * Created by Anand on 3/8/2016.
  */
@@ -22,8 +24,50 @@ public class Numbers {
         }
     }
 
+    public static int vectorDotProduct(Vector vector1, Vector vector2) {
+        int len1 = vector1.size();
+        int len2 = vector2.size();
+
+        int count = len2 > len1 ? len1 : len2;
+        int sum = 0;
+        for (int i = 0; i < count; i++) {
+            sum += (int) vector1.get(i) * (int) vector2.get(i);
+        }
+        return sum;
+    }
+
+    public static void findPrimeFactors(int n) {
+
+        while (n % 2 == 0) {
+            System.out.println(2);
+            n = n / 2;
+        }
+        for (int i = 3; i < Math.sqrt(n); i = i + 2) {
+            while (n % i == 0) {
+                System.out.println(i);
+                n = n/3;
+            }
+        }
+        if (n > 2)
+            System.out.println(n);
+    }
+
     public static void main(String[] args) {
-        System.out.println(isHappy(19));
+        /*Scanner scanner = new Scanner(System.in);
+
+        int val1 = scanner.nextInt();
+        int val2 = scanner.nextInt();
+
+        ArrayList<Integer> v1 = new ArrayList<Integer>();
+        ArrayList<Integer> v2 = new ArrayList<Integer>();
+        int maxIndex =0;
+        for(int i=0;i<val1;i++){
+            int x = scanner.nextInt();
+        }*/
+
+        findPrimeFactors(15);
+
+
     }
 
 

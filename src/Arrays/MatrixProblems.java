@@ -3,7 +3,7 @@ package Arrays;
 /**
  * Created by Anand on 1/30/2016.
  */
-public class TwoDArrays {
+public class MatrixProblems {
 
 
     public static int[][] floodFill(int[][] array, int x, int y, int color) {
@@ -77,15 +77,45 @@ public class TwoDArrays {
         for (int i = 0; i < n / 2; i++) {
             for (int j = 0; j < Math.ceil(((double) n) / 2.); j++) {
                 int temp = matrix[i][j];
-                matrix[i][j] = matrix[n-1-j][i];
-                matrix[n-1-j][i] = matrix[n-1-i][n-1-j];
-                matrix[n-1-i][n-1-j] = matrix[j][n-1-i];
-                matrix[j][n-1-i] = temp;
+                matrix[i][j] = matrix[n - 1 - j][i];
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+                matrix[j][n - 1 - i] = temp;
             }
         }
         return matrix;
     }
 
+    public static void rotateMatrix90(int[][] matrix) {
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        printMatrix(matrix);
+
+        //transpose a matrix
+        for (int i = 0; i < rows; i++) {
+            for (int j = i + 1; j < cols; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        printMatrix(matrix);
+
+        //reverse each row of the matrix
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0, k = cols - 1; j < k; j++, k--) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][k];
+                matrix[i][k] = temp;
+            }
+        }
+        System.out.println();
+        System.out.println();
+        printMatrix(matrix);
+
+    }
 
 
 
@@ -99,27 +129,24 @@ public class TwoDArrays {
 
     public static void main(String[] args) {
         int[][] inputArray = new int[][]{{1, 2, 3,}, {4, 5, 6}, {7, 8, 9}};
-        printMatrix(inputArray);
+        rotateMatrix90(inputArray);
 
-        printMatrix(rotate(inputArray));
 
     }
 
 
-    public static void printMatrix(int [][] matrix){
+    public static void printMatrix(int[][] matrix) {
 
-        for(int i=0;i<matrix.length;i++){
-        for(int j=0;j<matrix[0].length;j++){
-            System.out.print(matrix[i][j]);
-            System.out.print(" ");
-        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j]);
+                System.out.print(" ");
+            }
             System.out.println();
 
         }
 
     }
-
-
 
 
 }

@@ -1,10 +1,38 @@
 package Arrays;
 
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /**
  * Created by Anand on 2/1/2016.
  */
 public class MiscellaneousProblems {
 
+
+    public static void priorityQueue(int[] n) {
+
+        Queue q = new PriorityQueue<Integer>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if (o1 > 02)
+                    return 1;
+                else
+                    return -1;
+
+            }
+        });
+        for (int i = 0; i < n.length; i++) {
+            q.add(n[i]);
+        }
+
+        Iterator it = q.iterator();
+        while (it.hasNext()) {
+            System.out.println("Value: " + it.next());
+        }
+
+    }
 
     public static void findKthSmallest(int[] nums, int k) {
 
@@ -65,12 +93,11 @@ public class MiscellaneousProblems {
         System.out.println("Total count " + count);
     }
 
-
     public static void bipraIntuit(int[] nums) {
         int min = nums[0];
         int max = nums[1];
         int tempMin = nums[0];
-        for (int i = 1; i < nums.length; i++) {
+        for (int i = 2; i < nums.length; i++) {
 
             if (nums[i] < min && nums[i] < tempMin) {
                 tempMin = nums[i];
@@ -84,7 +111,6 @@ public class MiscellaneousProblems {
         System.out.println("Max\t" + max);
 
     }
-
 
     public static int kthLargest(int[] nums, int k) {
         int lo = 0;
@@ -120,11 +146,10 @@ public class MiscellaneousProblems {
         return i - 1;
     }
 
-
     private static int firstGreaterEqual(int[] A, int target) {
         int low = 0, high = A.length;
         while (low < high) {
-            int mid = low + ((high - low) /2);
+            int mid = low + ((high - low) / 2);
             //low <= mid < high
             if (A[mid] < target) {
                 low = mid + 1;
@@ -135,9 +160,50 @@ public class MiscellaneousProblems {
         return low;
     }
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{4,2,1,-2,0};
-       findKthSmallest(nums, 2);
+    private static void maxProfit(int[] nums) {
+        int min = nums[0];
+        int currMin = nums[0];
+        int diff = 0;
+        int max = nums[0];
 
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < currMin) {
+                currMin = nums[i];
+            } else if (nums[i] - currMin > diff) {
+                min = currMin;
+                max = nums[i];
+                diff = max - min;
+            }
+        }
+        System.out.println(min);
+        System.out.println(max);
+
+    }
+
+    private static void sortArrayWave(int[] nums) {
+
+        if (nums == null)
+            return;
+
+        for (int i = 0; i < nums.length; i+=2) {
+            if(i>0 && nums[i] <nums[i-1]){
+                int temp = nums[i];
+                nums[i] = nums[i-1];
+                nums[i-1] = temp;
+            }
+            if(i<nums.length - 1 && nums[i] <nums[i+1]){
+                int temp = nums[i];
+                nums[i] = nums[i+1];
+                nums[i+1] = temp;
+            }
+        }
+        arrayPrinter(nums);
+
+    }
+
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{4, 2, 1, -2, 100};
+        sortArrayWave(new int[]{3, 1, 11, 3, 22, 3});
     }
 }

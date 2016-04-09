@@ -1,5 +1,7 @@
 package Trees;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.*;
 
 /**
@@ -189,10 +191,10 @@ public class LeetCodeTrees {
 
     public static void printPathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tempList, int pathlen) {
 
-
         if (root == null) {
             return;
         }
+
         tempList.add(root.val);
         pathlen++;
         if (root.left == null && root.right == null && root.val == sum) {
@@ -301,26 +303,39 @@ public class LeetCodeTrees {
         }
     }
 
+    public static TreeNode shufflePointer(TreeNode root){
+        if(root == null)
+            return root;
+        if(root.left == null && root.right ==null)
+            return root;
+        TreeNode right = shufflePointer(root.right);
+        TreeNode left = shufflePointer(root.left);
+        if(right!=null && left!=null){
+            left.right = right;
+            root.right = null;
+        }
+        return root;
+    }
+
     public static void main(String[] args) {
 
         TreeNode n1 = new TreeNode(9);
         TreeNode n2 = new TreeNode(5);
         TreeNode n3 = new TreeNode(20);
         TreeNode n4 = new TreeNode(4);
-        TreeNode n5 = new TreeNode(4);
+        TreeNode n5 = new TreeNode(8);
         TreeNode n6 = new TreeNode(12);
         TreeNode n7 = new TreeNode(22);
-        TreeNode n8 = new TreeNode(80);
+        TreeNode n8 = new TreeNode(45);
+        TreeNode n9 = new TreeNode(45);
+        TreeNode n10 = new TreeNode(45);
         n1.left = n2;
         n1.right = n3;
         n2.left = n4;
         n2.right = n5;
         n3.left = n6;
         n3.right = n7;
-        //   TreeNode temp = sortedArrayToBst(new int[]{1, 2, 3, 4, 5, 6});
-        BTreePrinter.printNode(n1);
-        System.out.println(binaryTreePaths(n1));
-
-    }
-
-}
+        n4.left = n8;
+        n4.right = n9;
+        List<String> ff=  binaryTreePaths(n1);
+    }}

@@ -180,6 +180,11 @@ public class MiscellaneousProblems {
 
     }
 
+
+
+
+
+
     private static void sortArrayWave(int[] nums) {
 
         if (nums == null)
@@ -198,12 +203,42 @@ public class MiscellaneousProblems {
             }
         }
         arrayPrinter(nums);
-
     }
 
 
-    public static void main(String[] args) {
+
+
+//      lo              hi
+//      5   1   2   3   4
+
+    public static int startIndexRotatedArray(int [] nums) throws Exception {
+
+        if(nums == null)
+            throw new Exception();
+
+        int len = nums.length;
+        int lo = 0;
+        int hi = len -1;
+
+        while(nums[lo] >nums[hi]){
+        int mid = (lo+hi)/2;
+        if(nums[mid]<nums[hi])
+            hi = mid;
+        else
+            lo =mid +1;
+        }
+        return lo;
+    }
+
+
+
+
+
+    public static void main(String[] args) throws Exception {
         int[] nums = new int[]{4, 2, 1, -2, 100};
-        sortArrayWave(new int[]{3, 1, 11, 3, 22, 3});
+      //  sortArrayWave(new int[]{3, 1, 11, 3, 22, 3});
+
+        System.out.println(startIndexRotatedArray(new int [] {4,5,1,2,3}));
+
     }
 }

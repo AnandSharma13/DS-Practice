@@ -14,7 +14,24 @@ public class CoinChange {
         if (n <= 0 && sum >= 0)
             return 0;
 
-        return foo(nums, n-1, sum) + foo(nums,n, sum - nums[n-1]);
+        return foo(nums, n - 1, sum) + foo(nums, n, sum - nums[n - 1]);
+    }
+
+    public static int fooDP(int[] nums, int n, int sum) {
+
+        if (sum == 0)
+            return 1;
+        if (n == 0)
+            return 0;
+        int[] sol = new int[sum + 1];
+
+        for (int i = 0; i <= sum; i++) {
+            for (int j = sol[i]; j < n; j++) {
+                sol[i] += sol[i - nums[j - 1]];
+            }
+
+        }
+        return -1;
     }
 
 

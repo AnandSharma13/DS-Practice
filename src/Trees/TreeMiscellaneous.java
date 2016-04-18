@@ -63,6 +63,19 @@ public class TreeMiscellaneous {
 
     }
 
+    public static boolean ismorphicTrees(TreeNode root1, TreeNode root2){
+    if(root1 == null && root2 == null)
+        return true;
+    if(root1 == null || root2==null)
+        return false;
+    if(root1.val != root2.val)
+        return false;
+
+    return ismorphicTrees(root1.left, root1.right) && ismorphicTrees(root1.right, root1.left);
+
+    }
+
+
     public static void main(String [] args){
        BTreePrinter.printNode(sortedArrayToBST(new int []{1,2,3}));
     }

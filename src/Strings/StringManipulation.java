@@ -1,7 +1,6 @@
 package Strings;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by Anand on 2/15/2016.
@@ -74,55 +73,70 @@ public class StringManipulation {
         String[] tokens = str.split(" ");
         StringBuilder sb = new StringBuilder();
         for (int i = tokens.length - 1; i > 0; i--)
-            sb.append(tokens[i]+ " ");
+            sb.append(tokens[i] + " ");
 
         sb.append(tokens[0]);
         return sb.toString();
     }
 
-    public static boolean canFormPalindrome(String str){
+    public static boolean canFormPalindrome(String str) {
 
-        int [] count = new int[256];
-        for(int i=0;i<str.length();i++){
+        int[] count = new int[256];
+        for (int i = 0; i < str.length(); i++) {
             count[(int) str.charAt(i)]++;
         }
         int oddCount = 0;
-        for(int i=0;i<count.length;i++){
-            if(count[i]%2 !=0)
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] % 2 != 0)
                 oddCount++;
         }
 
-        if(oddCount >1)
+        if (oddCount > 1)
             return false;
 
         return true;
 
     }
 
-    public static void LongestCommonSubstring(ArrayList<String> list){
-        if(list ==null || list.size() ==0)
+    public static void LongestCommonSubstring(ArrayList<String> list) {
+        if (list == null || list.size() == 0)
             return;
         String str1 = list.get(0);
-        for(int i=1;i<list.size();i++){
+        for (int i = 1; i < list.size(); i++) {
             String str2 = list.get(i);
-            for(int j = 0;j<str1.length()&& j< str2.length();j++){
-                if(str1.charAt(j)!=str2.charAt(j)){
-                    str1 = str1.substring(0,j);
+            for (int j = 0; j < str1.length() && j < str2.length(); j++) {
+                if (str1.charAt(j) != str2.charAt(j)) {
+                    str1 = str1.substring(0, j);
                 }
             }
         }
         System.out.println(str1);
     }
 
+    // A string consists of ‘0’, ‘1’ and '?'. The question mark can be either '0' or '1'. Find all possible combinations for a string.
+
+    public static void replaceQuestionMarks(char[] str, int i) {
+
+        if(i == str.length){
+            System.out.println(String.valueOf(str));
+        }
+        else if(str[i] =='?'){
+            str[i] = '0';
+            replaceQuestionMarks(str, i+1);
+            str[i] = '1';
+            replaceQuestionMarks(str, i+1);
+            str[i] = '?';
+        }
+        else
+            replaceQuestionMarks(str, i+1);
+    }
+
+
+
+
     public static void main(String[] args) {
+        char[] arr = new char[]{'0', '?', '1'};
+       // replaceQuestionMarks(arr, 0);
 
-     /*   Scanner in = new Scanner(System.in);
-        String str = in.nextLine();
-        System.out.println(canFormPalindrome(str));*/
-
-        LongestCommonSubstring(new ArrayList<String>(){{
-        add("hellosdsd");
-        add("hellsdsdSD");
-        add("qhellla");
-    }});
-}}
+    }
+}

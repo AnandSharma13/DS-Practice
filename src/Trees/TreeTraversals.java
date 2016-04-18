@@ -122,7 +122,6 @@ public class TreeTraversals {
             TreeNode temp;
             if (flag && !rightToLeftStack.isEmpty()) {
                 temp = rightToLeftStack.pop();
-                System.out.println(temp.val);
                 if (temp.left != null)
                     leftToRightStack.push(temp.left);
                 if (temp.left != null)
@@ -131,7 +130,6 @@ public class TreeTraversals {
                     flag = false;
             } else if (!flag && !leftToRightStack.isEmpty()) {
                 temp = leftToRightStack.pop();
-                System.out.println(temp.val);
                 if (temp.right != null)
                     rightToLeftStack.push(temp.right);
                 if (temp.left != null)

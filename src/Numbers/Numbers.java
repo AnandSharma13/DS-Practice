@@ -52,6 +52,16 @@ public class Numbers {
             System.out.println(n);
     }
 
+    public static String numberToString(int number){
+
+        String []ones= {"", "one", "two", "three", "four", "five" , "six", "seven" , "eight", "nine"};
+        String []tens= {"", "ten", "twenty", "thirty", "fourty", "fifty" , "sixty", "seventy" , "eighty", "ninety"};
+        String []hundreds= {"", "", "one-hundred", "two-hundred", "three-hundred", "four-hundred" , "five-hundred", "six-hundred" , "seven-hundred", "eight-hundred", "nine-hundred"};
+
+        return  hundreds[(number%1000)/100]+" "+tens[(number%100)/10]+" "  +ones[number%10];
+    }
+
+
     public static void main(String[] args) {
         /*Scanner scanner = new Scanner(System.in);
 
@@ -64,7 +74,7 @@ public class Numbers {
         for(int i=0;i<val1;i++){
             int x = scanner.nextInt();
         }*/
-
+        System.out.println(numberToString(678));
         findPrimeFactors(15);
 
 

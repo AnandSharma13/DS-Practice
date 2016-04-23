@@ -18,7 +18,6 @@ public class RatMaze {
 
     static boolean solveRatMazeUtils(int[][] maze, int x, int y, int[][] sol, int destX, int destY) {
         if (x == destX - 1 && y == destY - 1) {
-            printMatrix(sol);
             return true;
         }
         if (isValid(maze, x, y, maze.length)) {
@@ -29,10 +28,14 @@ public class RatMaze {
             if (solveRatMazeUtils(maze, x + 1, y, sol, destX, destY)) {
                 return true;
             }
+//            if (solveRatMazeUtils(maze, x - 1, y, sol, destX, destY)) {
+//                return true;
+//            } if (solveRatMazeUtils(maze, x, y-1, sol, destX, destY)) {
+//                return true;
+//            }
             sol[x][y] = 0;
             return false;
         }
-
         return false;
     }
 
@@ -52,7 +55,7 @@ public class RatMaze {
     public static void main(String[] args) {
         int maze[][] = new int[][]{{1, 0, 0},
                 {1, 1, 0},
-                {0, 1, 1}
+                {0, 1, 0}
         };
         System.out.println(solveRatMaze(maze));
 

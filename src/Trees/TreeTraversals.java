@@ -118,10 +118,11 @@ public class TreeTraversals {
         boolean flag = true;
         rightToLeftStack.push(root);
 
-        while (true) {
+        while (!rightToLeftStack.isEmpty() || !leftToRightStack.isEmpty()) {
             TreeNode temp;
             if (flag && !rightToLeftStack.isEmpty()) {
                 temp = rightToLeftStack.pop();
+                System.out.println(temp.val);
                 if (temp.left != null)
                     leftToRightStack.push(temp.left);
                 if (temp.left != null)
@@ -130,6 +131,7 @@ public class TreeTraversals {
                     flag = false;
             } else if (!flag && !leftToRightStack.isEmpty()) {
                 temp = leftToRightStack.pop();
+                System.out.println(temp.val);
                 if (temp.right != null)
                     rightToLeftStack.push(temp.right);
                 if (temp.left != null)
@@ -137,8 +139,7 @@ public class TreeTraversals {
                 if (leftToRightStack.isEmpty())
                     flag = true;
             }
-            if (rightToLeftStack.isEmpty() && leftToRightStack.isEmpty())
-                break;
+
         }
     }
 
@@ -160,7 +161,7 @@ public class TreeTraversals {
         n3.right = n7;
 
         BTreePrinter.printNode(n1);
-        postOrderIterative(n1);
+        ZigZagTraversal(n1);
 
     }
 }

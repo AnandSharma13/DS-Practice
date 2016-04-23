@@ -24,19 +24,17 @@ public class CoinChange {
         if (n == 0)
             return 0;
         int[] sol = new int[sum + 1];
+        sol[0]=1;
+        for(int i=0; i<n; i++)
+            for(int j=nums[i]; j<=sum; j++)
+                sol[j] += sol[j-nums[i]];
 
-        for (int i = 0; i <= sum; i++) {
-            for (int j = sol[i]; j < n; j++) {
-                sol[i] += sol[i - nums[j - 1]];
-            }
-
-        }
-        return -1;
+        return sol[sum];
     }
 
 
     public static void main(String ars[]) {
-        System.out.println(foo(new int[]{1, 2, 3}, 3, 4));
+        System.out.println(fooDP(new int[]{1, 2, 3}, 3, 1));
 
     }
 

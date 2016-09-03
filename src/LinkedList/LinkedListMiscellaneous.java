@@ -120,17 +120,39 @@ public class LinkedListMiscellaneous {
         return slowPtr;
     }
 
+    public static ListNode partition(ListNode head, int x) {
+        ListNode dummy1 = new ListNode(0), dummy2 = new ListNode(0);  //dummy heads of the 1st and 2nd queues
+        ListNode curr1 = dummy1, curr2 = dummy2;      //current tails of the two queues;
+        while (head!=null){
+            if (head.val<x) {
+                curr1.next = head;
+                curr1 = head;
+            }else {
+                curr2.next = head;
+                curr2 = head;
+            }
+            head = head.next;
+        }
+        curr2.next = null;          //important! avoid cycle in linked list. otherwise u will get TLE.
+        curr1.next = dummy2.next;
+        return dummy1.next;
+    }
+
     public static void main(String[] args) {
-        ListNode n1 = new ListNode(2);
-        ListNode n2 = new ListNode(8);
-        ListNode n3 = new ListNode(7);
-        ListNode n4 = new ListNode(17);
+        ListNode n1 = new ListNode(5);
+        ListNode n2 = new ListNode(6);
+        ListNode n3 = new ListNode(1);
+        ListNode n4 = new ListNode(2);
 
 
         n1.next = n2;
         n2.next = n3;
         n3.next = n4;
-        n4.next = n1;
+
+
+        LinkedListPrinter.printLinkedList(partition(n1,3));
+
+
 
         ListNode a1 = new ListNode(8);
         ListNode a2 = new ListNode(4);
@@ -139,7 +161,7 @@ public class LinkedListMiscellaneous {
         a1.next = a2;
         a2.next = a3;
 
-   splitCircularLinkedList(n1);
+  // splitCircularLinkedList(n1);
         //    LinkedListPrinter.printLinkedList(n1);
 
     }

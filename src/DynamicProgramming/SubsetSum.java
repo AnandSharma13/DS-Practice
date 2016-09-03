@@ -16,29 +16,29 @@ public class SubsetSum {
 
     public static boolean fooDP(int[] nums, int n, int sum) {
 
-        boolean[][] matrix = new boolean[n + 1][sum + 1];
+        boolean[][] lookUp = new boolean[sum + 1][nums.length + 1];
+        for (int i = 1; i <= sum; i++)
+            lookUp[i][0] = false;
+        for (int i = 0; i <= nums.length; i++)
+            lookUp[0][i] = true;
 
-        for (int i = 0; i <= sum; i++) {
-            matrix[i][0] = true;
-        }
-        for (int i = 1; i <= n; i++) {
-            matrix[0][i] = false;
-        }
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= sum; j++) {
-                matrix[i][j] = matrix[i - 1][j];
-                if (j >= nums[i - 1]) {
-                    matrix[i][j] = matrix[i][j] ||matrix[i-1][j-nums[i-1]];
+        for (int i = 1; i <= sum; i++) {
+            for (int j = 1; j <= nums.length; j++) {
+                lookUp[i][j] = lookUp[i][j-1];
+                if(nums[j-1]<=i){
+                    lookUp[i][j] = lookUp[i][j] || lookUp[i-nums[j-1]][j-1];
                 }
             }
         }
-        return false;
+
+        return lookUp[sum][nums.length];
     }
+
+
 
     public static void main(String[] args) {
         int[] nums = new int[]{5, 1, 4, 1, 3, 5, 8};
-        System.out.println(foo(nums, nums.length, 29));
+        System.out.println(fooDP(nums, nums.length, 29));
 
     }
 }

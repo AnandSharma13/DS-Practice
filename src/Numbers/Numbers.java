@@ -61,6 +61,22 @@ public class Numbers {
         return  hundreds[(number%1000)/100]+" "+tens[(number%100)/10]+" "  +ones[number%10];
     }
 
+    public static int mySqrt(int x){
+        if(x==0)
+            return 0;
+        int left = 1;
+        int right = x;
+        while(left<right){
+            int mid = left + (right-left)/2;
+            if(mid <= x / mid) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left-1;
+    }
+
 
     public static void main(String[] args) {
         /*Scanner scanner = new Scanner(System.in);
@@ -74,9 +90,8 @@ public class Numbers {
         for(int i=0;i<val1;i++){
             int x = scanner.nextInt();
         }*/
-        System.out.println(numberToString(678));
-        findPrimeFactors(15);
-
+        System.out.println(mySqrt(4));
+       // findPrimeFactors(15);
 
     }
 

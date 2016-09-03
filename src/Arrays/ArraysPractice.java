@@ -49,6 +49,12 @@ public class ArraysPractice {
 
     }
 
+
+    public static void mergeSortedArrays(int[] arr1, int[] arr2) {
+
+
+    }
+
     public static void multiplyTwoNumber(int[] A, int[] B) {
         int[] C = new int[A.length + B.length];
         int s = C.length - 1;
@@ -87,7 +93,7 @@ public class ArraysPractice {
                     return +1;
             }
         });
-        for(Student s: list)
+        for (Student s : list)
             System.out.println(s.id);
     }
 

@@ -46,7 +46,6 @@ public class KnightsTourProblem {
                 else
                     matrix[newX][newY] = -1;
             }
-
         }
         return false;
     }

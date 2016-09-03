@@ -98,34 +98,37 @@ public class LeetCodeArrays {
 
         int res = 6 ^ 54 ^ 2 ^ 3 ^ 4 ^ 1 ^ 5;
         int two = 1 ^ 2 ^ 3 ^ 4 ^ 5;
-        System.out.println(res);
-        System.out.println(two);
-        System.out.println(res ^ two);
+
+        System.out.println(threeSum(new int [] {-1,0,1,2,-1,-4}));
+//        System.out.println(res);
+//        System.out.println(two);
+//        System.out.println(res ^ two);
 
     }
 
 
     //  Find three integers that sum to 0
-    public List<List<Integer>> threeSum(int[] nums) {
+    public static List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if (nums.length < 2)
             return result;
         Arrays.sort(nums);
         for (int i = 0; i < nums.length - 2; i++) {
+            //avoid duplicates for first number
             if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
                 int lo = i + 1;
                 int hi = nums.length - 1;
                 int sum = nums[i];
                 while (lo < hi) {
-                    sum += nums[lo] + nums[hi];
-                    if (sum == 0) {
+                    //sum += nums[lo] + nums[hi];
+                    if (sum + nums[lo] + nums[hi] == 0) {
                         result.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
                         //avoid dupicates
                         while (lo < hi && nums[lo] == nums[lo + 1]) lo++;
                         while (lo < hi && nums[hi] == nums[hi - 1]) hi--;
                         lo++;
                         hi--;
-                    } else if (sum > 0) {
+                    } else if (sum + nums[lo] + nums[hi] > 0) {
                         hi--;
                     } else
                         lo++;

@@ -3,7 +3,9 @@ package Strings;
 
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 
@@ -27,7 +29,6 @@ public class StringMiscellaneous {
             extendPalindrome(str, i, i, maxlen, lo);    // odd palindrome
             extendPalindrome(str, i, i + 1, maxlen, lo); // even palindrome
         }
-
         return str.substring(lo[0], lo[0] + maxlen[0]);
     }
 
@@ -95,12 +96,36 @@ public class StringMiscellaneous {
 
     }
 
+    public static void compressString(String str){
+        if(str == null|| str.length() ==0)
+            return;
+        int count =1;
+        StringBuilder sb = new StringBuilder();
+        for(int i =1;i<str.length();i++){
+            if(str.charAt(i) != str.charAt(i-1)){
+                sb.append(count + String.valueOf(str.charAt(i-1)));
+                count =1;
+            }
+            else
+                count++;
+
+        }
+        sb.append(count + String.valueOf(str.charAt(str.length()-1)));
+        System.out.println(sb);
+
+    }
+
+
+
     public static void main(String[] args) {
         //       stringSubstring("fun");
 
-        System.out.println(oneEditDistance("ageeka", "geeka"));
-        countChars("Anand ssd fdfdf");
-        removeDups("My name is hi My name anand sharma");
+//        System.out.println(oneEditDistance("ageeka", "geeka"));
+ //       compressString("aaabbc");
+  //      countChars("Anand ssd fdfdf");
+  //      removeDups("My name is hi My name anand sharma");
+
+
     }
 
 

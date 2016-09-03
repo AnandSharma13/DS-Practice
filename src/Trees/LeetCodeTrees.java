@@ -1,7 +1,6 @@
 package Trees;
 
-import sun.reflect.generics.tree.Tree;
-
+import sun.reflect.generics.tree.*;
 import java.util.*;
 
 /**

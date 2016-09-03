@@ -48,6 +48,8 @@ public class LeetCodeLinkedList {
 
     }
 
+
+    //3-->4-->5-->6-->8-->9
     public static ListNode reverseLinkedListPairs(ListNode head) {
         if (head == null || head.next == null)
             return head;
@@ -85,6 +87,8 @@ public class LeetCodeLinkedList {
             ptr = ptr.next;
             len++;
         }
+
+        System.out.println(len - k % len);
         for (int i = len - k % len; i > 0; i--) {
             slowPtr = slowPtr.next;
         }
@@ -225,8 +229,8 @@ public class LeetCodeLinkedList {
         a4.next = a5;
         a5.next = a6;
 
-        LinkedListPrinter.printLinkedList(n1);
-        LinkedListPrinter.printLinkedList(deleteDups(n1));
+        LinkedListPrinter.printLinkedList(a1);
+        LinkedListPrinter.printLinkedList(rotateRight(a1,8));
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

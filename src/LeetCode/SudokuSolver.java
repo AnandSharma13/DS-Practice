@@ -26,7 +26,7 @@ public class SudokuSolver {
                 }
                 int colIndex = 3 * (i % 3);
                 int rowIndex = 3 * (i / 3);
-                if (board[rowIndex + j / 3][colIndex + j % 3] != '.' && !cube.add(board[rowIndex + j % 3][colIndex + j % 3])) {
+                if (board[rowIndex + j / 3][colIndex + j % 3] != '.' && !cube.add(board[rowIndex + j / 3][colIndex + j % 3])) {
                     return false;
                 }
             }

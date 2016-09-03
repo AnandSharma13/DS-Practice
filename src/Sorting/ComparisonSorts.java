@@ -1,5 +1,8 @@
 package Sorting;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * Created by Anand on 2/1/2016.
  */
@@ -23,7 +26,7 @@ public class ComparisonSorts {
                 }
             }
         }
-        arrayPrinter(nums);
+        //     arrayPrinter(nums);
     }
 
     public static void QuickSort(int[] nums, int lo, int hi) {
@@ -96,7 +99,6 @@ public class ComparisonSorts {
             } else {
                 k++;
             }
-
         }
 
     }
@@ -113,18 +115,45 @@ public class ComparisonSorts {
                 j--;
             }
         }
+        // arrayPrinter(arr);
+    }
+
+
+    public static void comparatorTest(Integer[] arr) {
+
+        Arrays.sort(arr, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
         arrayPrinter(arr);
+    }
+
+    public static void comparatorTestString(String[] arr) {
+
+        Arrays.sort(arr, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+     //  arrayPrinter(arr);
+
     }
 
 
     public static void main(String[] args) {
-        int[] nums = new int[]{3, 4, 1, 2, 5};
-        insertionSort(nums);
+        Integer[] nums = new Integer[]{3, 30, 34, 5, 9};
+
+        comparatorTest(nums);
+        comparatorTestString(new String[]{"Anand","Abhishek","Sharma"});
+        //  insertionSort(nums);
         // arrayPrinter(nums);
     }
 
 
-    public static void arrayPrinter(int[] nums) {
+    public static void arrayPrinter(Integer[] nums) {
         for (int i = 0; i < nums.length; i++) {
             System.out.println(nums[i]);
         }

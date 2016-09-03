@@ -31,7 +31,7 @@ public class TreeTraversals {
 
     public static void PreOrder(TreeNode root) {
         if (root == null)
-            return;
+            System.out.print("NULL");
         else {
             System.out.print(root.val + " ");
             PreOrder(root.left);
@@ -161,7 +161,7 @@ public class TreeTraversals {
         n3.right = n7;
 
         BTreePrinter.printNode(n1);
-        ZigZagTraversal(n1);
+        PreOrder(n1);
 
     }
 }
